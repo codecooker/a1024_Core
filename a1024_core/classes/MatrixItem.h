@@ -17,7 +17,11 @@ public:
     IndexPath *newIndex;
     long valueAddr;
     string toString();
+    string indexSting();
     virtual ~MatrixItem();
+    MatrixItem();
+    bool isMerged;
+    bool isUsed;
     long value;
 };
 

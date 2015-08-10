@@ -23,6 +23,7 @@ public:
     IndexPath(long x,long y);
     string toString();
     void goDirection(Direction *direction);
+    long vectorIndex(Direction *direction);
 };
 
 #endif /* defined(__a1024_core__IndexPath__) */

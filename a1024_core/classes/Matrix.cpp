@@ -26,42 +26,66 @@ Matrix::~Matrix() {
 void Matrix::vectorGoDirection(vector<MatrixItem*> aVector,Direction *direction) {
     if (direction->isRight() || direction->isDown()) {
         for (long i = aVector.size() - 1; i >= 0; --i) {
+            long directionCount = 0;
             for (long j = i + 1; j < aVector.size(); ++j) {
                 if (aVector.at(j)->value == 0) {
-                    aVector.at(i)->newIndex->goDirection(direction);
-                }else if(aVector.at(j)->value == aVector.at(i)->value){
-                    aVector.at(i)->newIndex->goDirection(direction);
-                    aVector.at(i)->value += aVector.at(j)->value;
-                    aVector.at(j)->value = 0;
+                    directionCount++;
+                    continue;
+//                    aVector.at(i)->newIndex->goDirection(direction);
+                }else if(aVector.at(j)->value == aVector.at(i)->value && !aVector.at(j)->isMerged){
+//                    aVector.at(i)->newIndex->goDirection(direction);
+                    aVector.at(j)->value += aVector.at(i)->value;
+                    aVector.at(i)->value = 0;
+                    aVector.at(j)->isMerged = true;
+                    directionCount = 0;
+                }else {
+                    break;
                 }
+            }
+            if (directionCount) {
+                aVector[i + directionCount]->value = aVector[i]->value;
+                aVector[i]->value = 0;
             }
         }
     }else if(direction->isLeft() || direction->isUp()){
         for (long i = 0; i < aVector.size(); ++i) {
+            long directionCount = 0;
             for (long j = i - 1; j >= 0; --j) {
                 if (aVector.at(j)->value == 0) {
-                    aVector.at(i)->newIndex->goDirection(direction);
-                }else if(aVector.at(j)->value == aVector.at(i)->value){
-                    aVector.at(i)->newIndex->goDirection(direction);
-                    aVector.at(i)->value += aVector.at(j)->value;
-                    aVector.at(j)->value = 0;
+                    directionCount++;
+                    continue;
+//                    aVector.at(i)->newIndex->goDirection(direction);
+                }else if(aVector.at(j)->value == aVector.at(i)->value && !aVector.at(j)->isMerged){
+//                    aVector.at(i)->newIndex->goDirection(direction);
+                    aVector.at(j)->value += aVector.at(i)->value;
+                    aVector.at(i)->value = 0;
+                    aVector.at(j)->isMerged = true;
+                }else {
+                    break;
                 }
+            }
+            if (directionCount) {
+                aVector[i - directionCount]->value = aVector[i]->value;
+                aVector[i]->value = 0;
             }
         }
     }
 }
 
 void Matrix::syncMatrix() {
-    vector<vector<MatrixItem*>> *aData = NULL;
-    this->reset(this->colCount, this->rowCount, &aData);
+//    vector<vector<MatrixItem*>> *aData = NULL;
+//    this->reset(this->colCount, this->rowCount, &aData);
     for (size_t i = 0; i < this->data->size(); ++i) {
         vector<MatrixItem*> rowVector = this->data->at(i);
         for (size_t j = 0; j < rowVector.size(); ++j) {
             MatrixItem *item = rowVector.at(j);
-            aData->at(item->newIndex->x)[item->newIndex->y] = item;
+//            if (item->value != 0) {
+//                aData->at(item->newIndex->y)[item->newIndex->x] = item;
+//            }
+            item->isMerged = false;
         }
     }
-    this->data = aData;
+//    this->data = aData;
 }
 
 void Matrix::goDirection(Direction *direction) {
@@ -70,17 +94,17 @@ void Matrix::goDirection(Direction *direction) {
             this->vectorGoDirection(this->data->at(i), direction);
         }
     }else if (direction->isUp() || direction->isDown()) {
-        for (size_t i = 0; i < this->data->size(); ++i) {
-            vector<MatrixItem*> rowVector = this->data->at(i);
+        for (size_t i = 0; i < this->colCount; ++i) {
             vector<MatrixItem*> colVector = vector<MatrixItem*>();
-            for (size_t j = 0; j < rowVector.size(); ++j) {
-                colVector.push_back(rowVector.at(0));
+            for (size_t j = 0; j < this->rowCount; ++j) {
+                vector<MatrixItem*> rowVector = this->data->at(j);
+                colVector.push_back(rowVector.at(i));
             }
             this->vectorGoDirection(colVector, direction);
             colVector.clear();
         }
     }
-    this->syncMatrix();
+//    this->syncMatrix();
 }
 
 void Matrix::reset(long colCount, long rowCount, vector<vector<MatrixItem *> > **aData) {
@@ -89,7 +113,7 @@ void Matrix::reset(long colCount, long rowCount, vector<vector<MatrixItem *> > *
         vector<MatrixItem*> *rowVector = new vector<MatrixItem*>();
         for (long j = 0; j < colCount; ++j) {
             MatrixItem *item = new MatrixItem();
-            item->newIndex = new IndexPath(0,0);
+            item->newIndex = new IndexPath(j,i);
             rowVector->push_back(item);
         }
         data->push_back(*rowVector);
@@ -103,6 +127,19 @@ string Matrix::toString() {
         vector<MatrixItem*> rowVector = this->data->at(i);
         for (size_t j = 0; j < rowVector.size(); ++j) {
             str += rowVector[j]->toString();
+            str += "\t";
+        }
+        str += "\n";
+    }
+    return str;
+}
+
+string Matrix::indexString() {
+    string str = "";
+    for (size_t i = 0; i < this->data->size(); ++i) {
+        vector<MatrixItem*> rowVector = this->data->at(i);
+        for (size_t j = 0; j < rowVector.size(); ++j) {
+            str += rowVector[j]->indexSting();
             str += "\t";
         }
         str += "\n";

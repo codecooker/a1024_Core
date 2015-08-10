@@ -7,9 +7,21 @@
 //
 
 #include "MatrixItem.h"
+#include <stdlib.h>
 
+MatrixItem::MatrixItem() {
+    this->isMerged = false;
+    this->value = 0;
+    this->isUsed = false;
+}
 
 string MatrixItem::toString() {
+    char *stringData = (char *)malloc(10);
+    sprintf(stringData, "%ld",this->value);
+    return stringData;
+}
+
+string MatrixItem::indexSting() {
     return this->newIndex->toString();
 }
 

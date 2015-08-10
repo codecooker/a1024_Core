@@ -22,12 +22,13 @@ class Matrix {
     private :
         long colCount;
         long rowCount;
-        vector<vector<MatrixItem*>> *data;
         void vectorGoDirection(vector<MatrixItem*> vector,Direction *direction);
     public :
         Matrix(long colCount,long rowCount);
         Matrix();
+        vector<vector<MatrixItem*>> *data;
         string toString();
+        string indexString();
         virtual ~Matrix();
         void reset(long colCount,long rowCount,vector<vector<MatrixItem*>> **data);
         void goDirection(Direction *direction);

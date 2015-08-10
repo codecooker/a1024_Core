@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BB04151C-437D-40EF-8969-1E7A457CC506</string>
+	<key>IDESourceControlProjectName</key>
+	<string>a1024_core</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>E8BF3ADC1F0996FF9D94E0D92B0351FC0B65361E</key>
+		<string>https://github.com/codecooker/a1024_Core.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>a1024_core.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>E8BF3ADC1F0996FF9D94E0D92B0351FC0B65361E</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/codecooker/a1024_Core.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>E8BF3ADC1F0996FF9D94E0D92B0351FC0B65361E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>E8BF3ADC1F0996FF9D94E0D92B0351FC0B65361E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>a1024_Core</string>
+		</dict>
+	</array>
+</dict>
+</plist>

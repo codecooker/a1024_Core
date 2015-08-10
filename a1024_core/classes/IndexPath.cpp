@@ -25,3 +25,12 @@ void IndexPath::goDirection(Direction *direction) {
     this->x += direction->x;
     this->y += direction->y;
 }
+
+long IndexPath::vectorIndex(Direction *direction) {
+    if (direction->isDown() || direction->isUp()) {
+        return y;
+    }else if (direction->isLeft() || direction->isRight()) {
+        return x;
+    }
+    return -1;
+}

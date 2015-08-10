@@ -12,9 +12,13 @@
 Direction::Direction(long x,long y) {
     if (labs(x) != 0) {
         this->x = labs(x) / labs(x);
+    }else {
+        this->x = 0;
     }
     if (labs(y) != 0) {
         this->y = labs(y) / labs(y);
+    }else {
+        this->y = 0;
     }
 }
 
